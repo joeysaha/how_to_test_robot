@@ -5,7 +5,9 @@ require './robot.rb'
 class TestRobot < MiniTest::Test
 
   def test_that_foreign_robot_needing_repairs_sent_to_station_1
-    skip
+    robot1 = Robot.new
+    robot1.todos = [@foreign_model, @needs_repairs]
+    assert(1, robot1.station)
     # arrange
 
     # act
@@ -14,7 +16,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_that_vintage_robot_needing_repairs_sent_to_station_2
-    skip
+    robot2 = Robot.new
+    robot2.todos = [@vintage_model, @needs_repairs]
+    assert(2, robot2.station)
     # arrange
 
     # act
@@ -23,7 +27,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_that_standard_robot_needing_repairs_sent_to_station_3
-    skip
+    robot3 = Robot.new
+    robot3.todos = [@needs_repairs]
+    assert(3, robot3.station)
     # arrange
 
     # act
@@ -32,7 +38,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_that_robot_in_good_condition_sent_to_station_4
-    skip
+    robot4 = Robot.new
+    robot4.todos = []
+    assert(4, robot4.station)
     # arrange
 
     # act
@@ -41,7 +49,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_prioritize_tasks_with_empty_todo_list_returns_negative_one
-    skip
+    robot5 = Robot.new
+    robot5.todos = []
+    assert(-1, robot5.prioritize_tasks)
     # arrange
 
     # act
