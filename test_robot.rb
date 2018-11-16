@@ -6,8 +6,10 @@ class TestRobot < MiniTest::Test
 
   def test_that_foreign_robot_needing_repairs_sent_to_station_1
     robot1 = Robot.new
-    robot1.todos = [@foreign_model, @needs_repairs]
+    # robot1.todos = [@foreign_model, @needs_repairs]
+
     assert(1, robot1.station)
+    # these steps are wrong
     # arrange
 
     # act
@@ -39,7 +41,6 @@ class TestRobot < MiniTest::Test
 
   def test_that_robot_in_good_condition_sent_to_station_4
     robot4 = Robot.new
-    robot4.todos = []
     assert(4, robot4.station)
     # arrange
 
@@ -50,7 +51,6 @@ class TestRobot < MiniTest::Test
 
   def test_prioritize_tasks_with_empty_todo_list_returns_negative_one
     robot5 = Robot.new
-    robot5.todos = []
     assert(-1, robot5.prioritize_tasks)
     # arrange
 
@@ -60,7 +60,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_prioritize_tasks_with_todos_returns_max_todo_value
-    skip
+    robot6 = Robot.new
+    todos = ["needs_repairs", "foreign_model"]
+    assert("needs_repairs", robot6.prioritize_tasks)
     # arrange
 
     # act
@@ -69,7 +71,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_workday_on_day_off_returns_false
-    skip
+    robot7 = Robot.new
+    robot7.day_off= "Sunday"
+    refute(false, robot7.workday?("Sunday"))
     # arrange
 
     # act
@@ -78,7 +82,9 @@ class TestRobot < MiniTest::Test
   end
 
   def test_workday_not_day_off_returns_true
-    skip
+    robot8 = Robot.new
+    robot8.day_off= "Sunday"
+    assert(true, robot8.workday?("Monday"))
     # arrange
 
     # act
